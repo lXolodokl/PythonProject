@@ -6,4 +6,4 @@ My Project Widget
 Установка
 Клонируйте репозиторий:
 
-git clone https://github.com/lXolodokl/my_project_widget
+git clone https://github.com/lXolodokl/PythonProject.git
