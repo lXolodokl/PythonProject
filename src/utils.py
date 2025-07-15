@@ -1,6 +1,13 @@
 import json
-import os
-from typing import List, Dict, Any
+import logging
+from typing import Any
+from typing import Dict
+from typing import List
+
+from logging_config import utils_logger
+
+logger = logging.getLogger('utils')
+
 
 def read_transactions(file_path: str) -> List[Dict[str, Any]]:
     """
@@ -15,11 +22,17 @@ def read_transactions(file_path: str) -> List[Dict[str, Any]]:
         возвращается пустой список.
     """
     try:
-        with open(file_path, 'r', encoding='utf-8') as file:
-            data = json.load(file)
-            if isinstance(data, list):
-                return data
-            else:
-                return []
-    except (FileNotFoundError, json.JSONDecodeError):
+        utils_logger.info(f"Попытка чтения файла: {file_path}")
+        with open(file_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        utils_logger.info(f"Успешное чтение файла: {file_path}")
+        return data if isinstance(data, list) else []
+    except FileNotFoundError:
+        utils_logger.error(f"Файл не найден: {file_path}")
+        return []
+    except json.JSONDecodeError:
+        utils_logger.error(f"Некорректный JSON в файле: {file_path}")
+        return []
+    except Exception as e:
+        utils_logger.error(f"Ошибка при чтении файла {file_path}: {e}")
         return []
