@@ -1,5 +1,8 @@
-from .masks import get_mask_card_number, get_mask_account
 from datetime import datetime
+
+from .masks import get_mask_account
+from .masks import get_mask_card_number
+
 
 def mask_account_card(line: str) -> str:
     """
@@ -18,6 +21,7 @@ def mask_account_card(line: str) -> str:
         *card_type, card_number = line.split()
         masked = get_mask_card_number(card_number)
         return f'{" ".join(card_type)} {masked}'
+
 
 def get_date(iso_datetime_str: str) -> str:
     """

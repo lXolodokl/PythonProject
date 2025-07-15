@@ -1,6 +1,8 @@
 import os
 import requests
-from typing import Dict, Any
+
+from typing import Any
+from typing import Dict
 
 
 def get_exchange_rate(currency_code: str) -> float:
